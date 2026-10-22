@@ -1,0 +1,11 @@
+{
+  "demonstration": true,
+  "submitted": false,
+  "report_id": "TT-1041",
+  "location": "Chennai Central",
+  "category": "Missing signage",
+  "evidence_status": "Verified",
+  "expected": "Wayfinding and facility information matches the observed condition",
+  "observed": "Platform interchange signage is missing at the north walkway in the demonstration record.",
+  "proposed_change": "Review the source record using independent evidence before applying any correction"
+}
