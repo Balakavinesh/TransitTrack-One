@@ -1,0 +1,5 @@
+stop_id,stop_name,stop_lat,stop_lon,zone_id,location_type,parent_station
+ST1,Airport,12.9800,80.1600,,1,
+P1,"Airport, Platform 1",12.9801,80.1601,Z1,0,ST1
+ST2,Guindy,13.0090,80.2130,,1,
+P2,Guindy Platform,13.0091,80.2131,Z2,0,ST2

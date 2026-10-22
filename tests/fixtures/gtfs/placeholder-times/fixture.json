@@ -1,0 +1,5 @@
+{
+  "description": "Two of five trips start at the filler time 00:00:15.",
+  "extends": "valid-minimal",
+  "expect": ["W_PLACEHOLDER_TIMES"]
+}

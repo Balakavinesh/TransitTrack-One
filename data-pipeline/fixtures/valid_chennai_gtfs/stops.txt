@@ -1,0 +1,12 @@
+stop_id,stop_name,stop_lat,stop_lon,location_type,parent_station,wheelchair_boarding,stop_code,zone_id
+central,Chennai Central,13.0827,80.2707,1,,1,MAS,ZONE_1
+egmore,Egmore,13.0782,80.2610,1,,2,MS,ZONE_1
+koyambedu,Koyambedu,13.0733,80.1948,1,,1,CMBT,ZONE_2
+guindy,Guindy,13.0097,80.2120,1,,1,GDY,ZONE_2
+alandur,Alandur,13.0040,80.2014,1,,1,ALR,ZONE_2
+airport,Chennai Airport,12.9808,80.1642,1,,1,MAA,ZONE_3
+tambaram,Tambaram,12.9250,80.1187,1,,2,TBM,ZONE_4
+thiruvanmiyur,Thiruvanmiyur,12.9896,80.2510,1,,2,TYMR,ZONE_3
+saidapet,Saidapet,13.0213,80.2280,1,,1,SDP,ZONE_2
+t-nagar,T. Nagar,13.0418,80.2341,0,,0,TNG,ZONE_2
+park-town,Park Town,13.0815,80.2740,1,,2,MPKT,ZONE_1

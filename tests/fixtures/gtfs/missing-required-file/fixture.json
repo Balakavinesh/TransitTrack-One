@@ -1,0 +1,6 @@
+{
+  "description": "stop_times.txt is absent.",
+  "extends": "valid-minimal",
+  "expect": ["E_MISSING_FILE"],
+  "remove": ["stop_times.txt"]
+}

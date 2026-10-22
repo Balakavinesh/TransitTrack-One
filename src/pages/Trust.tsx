@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useReducedMotion } from "framer-motion";
 import { useApp } from "../lib/state";
 import {
@@ -31,6 +31,8 @@ import {
   Modal,
 } from "../components/ui";
 import { sources, evidenceDistribution } from "../data/demo";
+import { api } from "../lib/api";
+
 export default function Trust() {
   const { preferences } = useApp();
   const systemReduced = useReducedMotion();
@@ -40,7 +42,25 @@ export default function Trust() {
   const [ascending, setAscending] = useState(false);
   const [detail, setDetail] = useState<(typeof sources)[number] | null>(null);
   const [issue, setIssue] = useState("Missing accessibility fields");
-  const visible = sources
+  const [sourceList, setSourceList] = useState(sources);
+  const [summaryData, setSummaryData] = useState<any>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    api.getTrustSummary(version).then((data) => {
+      if (mounted && data) {
+        setSummaryData(data);
+        if (data.sources) {
+          setSourceList(data.sources);
+        }
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, [version]);
+
+  const visible = sourceList
     .filter((s) => filter === "All modes" || s.mode === filter)
     .sort((a, b) =>
       ascending
@@ -75,25 +95,34 @@ export default function Trust() {
         {[
           {
             label: "Sample data sources",
-            value: "04",
+            value: summaryData?.metrics?.totalSources
+              ? String(summaryData.metrics.totalSources).padStart(2, "0")
+              : "04",
             sub: "Four modes, one perspective",
             icon: Database,
           },
           {
             label: "Sample completeness",
-            value: old ? "70%" : "78%",
+            value: summaryData?.metrics?.completeness || (old ? "70%" : "78%"),
             sub: "Across fixture records",
             icon: Layers,
           },
           {
             label: "Consistent evidence",
-            value: old ? "54%" : "62%",
+            value:
+              summaryData?.metrics?.consistentEvidence ||
+              (old ? "54%" : "62%"),
             sub: "Illustrative evidence coverage",
             icon: ShieldCheck,
           },
           {
             label: "Validation findings",
-            value: old ? "34" : "28",
+            value:
+              summaryData?.metrics?.validationFindings !== undefined
+                ? String(summaryData.metrics.validationFindings)
+                : old
+                  ? "34"
+                  : "28",
             sub: "Sample issues to investigate",
             icon: FileWarning,
           },

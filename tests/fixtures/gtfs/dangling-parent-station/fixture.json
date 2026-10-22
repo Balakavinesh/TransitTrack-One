@@ -1,0 +1,5 @@
+{
+  "description": "A platform names a parent station that does not exist.",
+  "extends": "valid-minimal",
+  "expect": ["E_DANGLING_REFERENCE"]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "trips.txt has no service_id column.",
+  "extends": "valid-minimal",
+  "expect": ["E_MISSING_COLUMN"]
+}

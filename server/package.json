@@ -1,0 +1,35 @@
+{
+  "name": "transittrack-one-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "migrate": "tsx src/db/migrate.ts",
+    "seed": "tsx src/db/seed.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.11",
+    "@fastify/cors": "^10.0.2",
+    "@fastify/rate-limit": "^10.2.2",
+    "@fastify/swagger": "^9.4.2",
+    "@fastify/swagger-ui": "^5.2.1",
+    "csv-parse": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "pg": "^8.13.3",
+    "yauzl": "^3.4.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "@types/pg": "^8.11.11",
+    "@types/yauzl": "^3.4.0",
+    "tsx": "^4.19.3",
+    "typescript": "~5.9.3",
+    "vitest": "^3.0.7"
+  }
+}

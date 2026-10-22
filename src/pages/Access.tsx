@@ -23,6 +23,8 @@ import {
 import TransitMap from "../components/TransitMap";
 import { stations } from "../data/demo";
 import { useApp } from "../lib/state";
+import { api } from "../lib/api";
+import { useEffect } from "react";
 const profiles = [
   {
     name: "Wheelchair users",
@@ -53,10 +55,18 @@ export default function Access() {
   const [query, setQuery] = useState("");
   const [mode, setMode] = useState("All modes");
   const [onlyVerified, setOnlyVerified] = useState(false);
+  const [stationList, setStationList] = useState(stations);
+
+  useEffect(() => {
+    api.getStations(mode, onlyVerified).then(res => {
+      if (res && res.length > 0) setStationList(res);
+    });
+  }, [mode, onlyVerified]);
+
   const [selected, setSelected] = useState(
     stations.find((s) => s.id === params.get("station")) || stations[3],
   );
-  const filtered = stations.filter(
+  const filtered = stationList.filter(
     (s) =>
       s.name.toLowerCase().includes(query.toLowerCase()) &&
       (mode === "All modes" || s.mode === mode) &&

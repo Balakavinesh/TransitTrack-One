@@ -22,6 +22,7 @@ import { JourneyCard, Timeline, SavedButton } from "../components/Journey";
 import TransitMap from "../components/TransitMap";
 import { findJourneys, journeys, type Journey, type Mode } from "../data/demo";
 import { useApp } from "../lib/state";
+import { api } from "../lib/api";
 export default function Planner() {
   const [params] = useSearchParams();
   const { preferences } = useApp();
@@ -56,22 +57,26 @@ export default function Planner() {
   const [date, setDate] = useState("2026-10-22");
   const [searched, setSearched] = useState({ origin, destination });
   const [stationNote, setStationNote] = useState("");
-  const search = (event?: React.FormEvent) => {
+  const search = async (event?: React.FormEvent) => {
     event?.preventDefault();
     setLoading(true);
     setStationNote("");
-    setTimeout(() => {
-      const next = findJourneys(origin, destination, {
+    try {
+      const next = await api.planJourneys(origin, destination, {
         modes,
         transfers,
         walking,
         profile,
+        time,
+        timing,
+        date,
       });
       setResults(next);
       setSelected(next[0]);
       setSearched({ origin, destination });
+    } finally {
       setLoading(false);
-    }, 350);
+    }
   };
   const reset = () => {
     setOrigin("Chennai Airport");

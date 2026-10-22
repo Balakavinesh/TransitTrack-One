@@ -1,0 +1,7 @@
+route_id,agency_id,route_short_name,route_long_name,route_type,route_color,route_text_color
+METRO_BLUE,CMRL,Blue,Wimco Nagar to Chennai Airport,1,20a69a,ffffff
+METRO_GREEN,CMRL,Green,Chennai Central to St. Thomas Mount,1,3bb143,ffffff
+SUB_BEACH_TBM,SR_SUB,Suburban,Chennai Beach to Tambaram,2,0055a5,ffffff
+MRTS_BEACH_VEL,SR_MRTS,MRTS,Chennai Beach to Velachery,2,ff7900,ffffff
+BUS_18A,MTC,18A,Broadway to Tambaram,3,e63946,ffffff
+BUS_21G,MTC,21G,Broadway to Tambaram via Guindy,3,f4a261,ffffff

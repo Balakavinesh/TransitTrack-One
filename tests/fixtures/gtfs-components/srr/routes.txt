@@ -1,0 +1,6 @@
+route_id,route_short_name,route_long_name,route_desc,route_type,agency_id
+40001,40001,MSB-TBM,MSB-TBM,2,SR
+40002,40002,TBM-MSB,TBM-MSB,2,SR
+40003,40003,MSB-CGL,MSB-CGL,2,SR
+40004,40004,MSB-TBM,MSB-TBM,2,SR
+40005,40005,TBM-MSB,TBM-MSB,2,SR

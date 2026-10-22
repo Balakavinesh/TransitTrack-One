@@ -1,58 +1,133 @@
 # TransitTrack One
 
-A complete React frontend demonstration of an evidence-aware multimodal mobility workspace for Chennai. Includes a public landing page, overview, nine dedicated feature modules, and supporting product pages.
+An Evidence-Aware Multimodal Journey Planning Web Platform with Accessibility Routing, Community Verification, and Network Resilience Analysis for Chennai.
 
-## Run locally
+---
 
-Requires Node.js 22.12+ (Node 24 recommended) and npm.
+## 1. System Overview
+
+TransitTrack One integrates public transit data across the four primary modes in Chennai:
+- **Chennai Metro (CMRL)** (Blue Line & Green Line)
+- **Metropolitan Transport Corporation (MTC)** (Bus network)
+- **Southern Railway (Chennai Suburban)** (South, West, and North lines)
+- **Mass Rapid Transit System (MRTS)** (Beach to Velachery elevated corridor)
+- **Pedestrian Connections & GTFS Pathways** (Walking transfers and step-free routes)
+
+The central contribution is the **Mobility Evidence Graph**, ensuring information quality directly informs journey recommendations, accessibility ratings, community review, and network resilience.
+
+### Feature Modules (M1–M9)
+- **M1: Evidence-Aware Journey Planning** — Multi-criteria timetable routing (McRAPTOR) with weakest-link confidence aggregation.
+- **M2: Access Profiles & Station Explorer** — Station topological pathways, lift/ramp operational evidence, and step-free routing.
+- **M3: Data Trust Centre** — Provenance tracking, completeness metrics, and feed version change history.
+- **M4: Community Ground Truth** — Passenger observations with anti-abuse corroboration and evidence updating.
+- **M5: Evidence-Aware Trip Companion** — Step-by-step guidance, saved trips, and dynamic disruption recovery.
+- **M6: Network Resilience Lab** — Station, transfer, and edge closure simulations with reachability and delay metrics.
+- **M7: Feeder Gap Insights** — Isochrone walking catchments, feeder gap scoring, and nearby POI access.
+- **M8: Open Data Bridge** — Export structured correction drafts (JSON, CSV, GitHub issue, OSM note) with integrity hashes.
+- **M9: Grounded Bilingual Mobility Assistant** — Conversational agent in Tamil and English with internal tool grounding and zero unsupported claims.
+
+---
+
+## 2. Quick Start
+
+### Prerequisites
+- Node.js 20+ (Node 24 recommended) and npm
+- Python 3.10+ (for the data validation pipeline)
+- Docker & Docker Compose (optional, for containerized PostgreSQL 16 + PostGIS)
+
+### Option A: Local Development (Zero-Config with In-Process PGlite)
 
 ```sh
+# 1. Install root dependencies
 npm install
+
+# 2. Install server dependencies
+npm --prefix server install
+
+# 3. Run database migrations & seed baseline data
+npm run server:migrate
+npm run server:seed
+
+# 4. Start backend server (port 3000)
+npm run server:dev
+
+# 5. In a separate terminal, start frontend client (port 5173)
 npm run dev
 ```
 
-Open the Local URL printed by Vite (normally http://localhost:5173).
+Open `http://localhost:5173` to explore the application. Interactive OpenAPI documentation is available at `http://localhost:3000/api/v1/docs`.
+
+### Option B: Docker Compose (Full-System Containerized)
 
 ```sh
-npm run build
-npm run preview
-npm test
+docker compose up --build
+```
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:3000/api/v1`
+- OpenAPI Docs: `http://localhost:3000/api/v1/docs`
+- PostgreSQL + PostGIS: `localhost:5432`
+
+---
+
+## 3. Automated Test Suites
+
+TransitTrack One includes 66 automated tests across three distinct test runners:
+
+```sh
+# Run all automated tests across the entire stack
+npm run test:all
 ```
 
-The build checks TypeScript before generating `dist/`. When hosting elsewhere, configure SPA fallback to `index.html` so direct `/app/*` links work.
+Individual test commands:
+```sh
+# Frontend test suite (30 tests: page coverage & critical interactions)
+npm test
 
-## Explore the demonstration
+# Server integration test suite (31 tests: auth, M1-M9 endpoints, database staging)
+npm run server:test
 
-- Search **Chennai Airport → Chennai Central**, **Tambaram → Guindy**, or **Chennai Central → Thiruvanmiyur**. Other pairs show an honest empty state.
-- Select an itinerary to update its highlighted Leaflet route and timeline. Preference filters work against fixture attributes; they do not run a routing algorithm.
-- Save trips and refresh: saved IDs persist locally. Access profiles, language, compact navigation, and reduced motion preferences also persist.
-- Select station markers and accessibility profiles. Evidence labels expand by click, keyboard, or touch.
-- Add a community report and exercise the local status workflow. Reports and attachments are not uploaded and reset on reload.
-- Preview a trip manually, toggle the offline UI preview, and inspect a prepared recovery alternative. No GPS is used.
-- Activate resilience closures and explore coverage layers. Values are explicitly illustrative; no graph calculations, walking catchments, or population analysis are performed.
-- Download JSON/CSV correction files and plain-text issue/OSM drafts. Exports contain demo markers and are never sent externally.
-- Try the rule-based assistant in English or Tamil. It requires no API key and links to relevant demo pages.
+# Python GTFS validation pipeline test suite (5 tests: Chennai rules & gating)
+npm run pipeline:test
+```
 
-## Architecture
+---
 
-`src/data/demo.ts` owns typed station, journey, leg, evidence, report, scenario, coverage, and assistant fixtures. IDs are stable. `findJourneys` and `assistantReply` form the small local behaviour boundary; replace these with backend calls when real services exist. UI modules live in `src/pages`, reusable components in `src/components`, persistent UI state in `src/lib/state.tsx`, and design tokens/responsive styling in `src/styles/global.css`. Feature pages are lazy loaded. Tailwind 4 uses its current Vite plugin, alongside custom semantic component CSS.
+## 4. Production Client Build
 
-Stack: React, TypeScript, Vite, Tailwind CSS, React Router, Lucide, Framer Motion, Recharts, React Leaflet/OpenStreetMap. Native form validation and explicit local validation keep the report form dependency-free.
+```sh
+# TypeScript check and Vite production bundling
+npm run build
 
-## Testing and accessibility
+# Preview production build locally
+npm run preview
+```
 
-Vitest + Testing Library cover all routes and the primary local workflows. Leaflet is mocked in DOM tests because map geometry requires a real browser; inspect the running application to verify tiles and route rendering. Native dialog elements provide keyboard focus containment and Escape behaviour. Inputs have labels, status changes use live regions, evidence has textual labels, and reduced-motion preferences are respected.
+---
 
-Responsive layouts target desktop, tablet, and 360–390px mobile screens. Mobile navigation is a drawer; the planner provides map/results switching. The interface uses a single considered light appearance. Tamil covers key navigation and assistant responses, not every detailed page.
+## 5. Technology Stack
 
-## Limitations and external requests
+- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS 4, React Router 7, React Leaflet, Recharts, Framer Motion, Lucide Icons.
+- **Backend API:** Fastify 5, TypeScript, OpenAPI / Swagger UI, Zod validation, JWT, scrypt password hashing.
+- **Database:** PostgreSQL 16 with PostGIS spatial extensions, or zero-config in-process `@electric-sql/pglite` (WebAssembly Postgres).
+- **Data Ingestion:** Python 3, GTFS validation engine with Chennai transit constraints (expired calendars, MTC placeholder departures, coordinate bounds, referential integrity).
+- **Routing Engine:** Multi-Criteria RAPTOR (McRAPTOR) with weakest-link evidence aggregation and disruption-aware graph traversal.
 
-No backend, actual routing engine, live tracking, operational timetables, authentication, real verification, live AI, or external correction submission is connected. An offline switch previews UI only; there is no service worker. Local storage may be unavailable in restrictive browser modes. Maps request public OpenStreetMap tiles; a readable overlay/marker fallback remains when tiles fail. Google Fonts is optional and has system-font fallbacks. Essential controls do not depend on fonts, tiles, or photos loading.
+---
 
-Do not use sample journey times, fares, accessibility records, or disruption values for real travel decisions. The UI displays this limitation throughout.
+## 6. Architecture & Documentation Directory
 
-## Asset attribution
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — Comprehensive architectural specifications, database schema, McRAPTOR routing, and evidence graph engine.
+- [docs/API.md](docs/API.md) — REST API reference across all `/api/v1` endpoints with request/response schemas.
+- [docs/DATA_PIPELINE.md](docs/DATA_PIPELINE.md) — GTFS ingestion pipeline, Chennai validation rules, feed staging, and transactional promotion.
+- [docs/DATA_LIMITATIONS.md](docs/DATA_LIMITATIONS.md) — Transit data realities in Chennai, truthfulness principles, and 4-band evidence model.
+- [docs/TEST_REPORT.md](docs/TEST_REPORT.md) — Full automated test report (66/66 tests passing).
+- [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) — Operational considerations, PGlite vs PostgreSQL, and roadmap enhancements.
+- [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) — Implementation phase checklist and delivery status.
+- [docs/UI_PAGES.md](docs/UI_PAGES.md) — Route and page interaction catalog.
 
-`public/images/chennai-metro.jpg`: **Chennai Metro Rail at Koyambedu**, KARTY JazZ, 5 July 2015. [Original Wikimedia Commons file](https://commons.wikimedia.org/wiki/File:Chennai_Metro_Rail_at_Koyambedu.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Displayed with CSS cropping and colour overlay; the original file is retained. Any adapted image must retain the same licence. Map data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).
+---
 
-See [docs/UI_PAGES.md](docs/UI_PAGES.md) for route coverage and [docs/VERIFICATION.md](docs/VERIFICATION.md) for actual check results.
+## 7. Asset Attribution
+
+- `public/images/chennai-metro.jpg`: **Chennai Metro Rail at Koyambedu**, KARTY JazZ, 5 July 2015. [Original Wikimedia Commons file](https://commons.wikimedia.org/wiki/File:Chennai_Metro_Rail_at_Koyambedu.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Displayed with CSS cropping and colour overlay. Any adapted image must retain the same licence.
+- Map tiles © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).

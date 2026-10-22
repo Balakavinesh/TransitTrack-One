@@ -1,0 +1,5 @@
+stop_id,stop_name,stop_lat,stop_lon
+1,Alpha,13.0000,80.2000
+2,Beta,13.0100,80.2100
+3,Gamma,13.0200,80.2200
+,,,

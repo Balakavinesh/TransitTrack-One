@@ -1,0 +1,10 @@
+stop_id,stop_name,stop_lat,stop_lon,location_type,parent_station
+MTC-S1,Alpha Bus Stop,13.0000,80.2000,0,
+" ",,,,,
+MTC-S2,Beta Bus Stop,13.0100,80.2100,0,
+MTC-S3,Gamma Bus Stop,13.0200,80.2200,0,
+CMRL-ST1,Alpha Metro,13.0005,80.2005,1,
+CMRL-P1,Alpha Metro Platform,13.0005,80.2006,0,CMRL-ST1
+CMRL-E1,Alpha Metro Entrance,13.0004,80.2004,2,CMRL-ST1
+CMRL-ST2,Delta Metro,13.0500,80.2500,1,
+CMRL-P2,Delta Metro Platform,13.0500,80.2501,0,CMRL-ST2

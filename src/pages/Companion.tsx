@@ -23,6 +23,8 @@ import {
 } from "../components/ui";
 import { Timeline, JourneyCard } from "../components/Journey";
 import TransitMap from "../components/TransitMap";
+import { api } from "../lib/api";
+
 export default function Companion({
   savedOnly = false,
 }: {
@@ -38,6 +40,7 @@ export default function Companion({
   const [query, setQuery] = useState("");
   const [remove, setRemove] = useState<string | null>(null);
   const [alternative, setAlternative] = useState(false);
+  const [recoveryJourney, setRecoveryJourney] = useState<(typeof journeys)[number] | null>(null);
   const listed = (
     savedOnly
       ? journeys.filter((j) => saved.includes(j.id))
@@ -275,16 +278,22 @@ export default function Companion({
             <Panel>
               <SectionHead
                 title="A prepared alternative"
-                meta="Sample recovery suggestion · not recalculated"
+                meta={
+                  recoveryJourney
+                    ? "Dynamic recovery suggestion · calculated via routing graph"
+                    : "Sample recovery suggestion · not recalculated"
+                }
               />
               <JourneyCard
                 journey={
+                  recoveryJourney ||
                   journeys.find(
                     (j) => j.origin === selected.origin && j.id !== selected.id,
                   ) || journeys[1]
                 }
                 onSelect={() => {
                   const next =
+                    recoveryJourney ||
                     journeys.find(
                       (j) =>
                         j.origin === selected.origin && j.id !== selected.id,
@@ -346,10 +355,18 @@ export default function Companion({
               Create a demo report
             </Go>
             <Button
-              onClick={() => {
+              onClick={async () => {
                 setAlternative(true);
                 setBlocked(false);
-                notify("Prepared alternative shown below the journey");
+                notify("Recovery route calculated");
+                const alts = await api.recoverTrip(
+                  selected,
+                  progress,
+                  selected.legs[progress]?.from || selected.origin,
+                );
+                if (alts && alts.length > 0) {
+                  setRecoveryJourney(alts[0]);
+                }
               }}
             >
               Show sample alternative <ArrowRight size={16} />

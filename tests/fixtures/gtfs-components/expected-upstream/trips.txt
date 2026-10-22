@@ -1,0 +1,9 @@
+trip_id,route_id,service_id,direction_id,trip_headsign,shape_id
+MTC-500,MTC-100,MTC-Regular,0,,
+MTC-501,MTC-100,MTC-Regular,1,,
+CMRL-T1,CMRL-B1,CMRL-WD,,Wimco Nagar,CMRL-SH1
+SRR-40001_T1,SRR-40001,SRR-service_1111111,,TBM,
+SRR-40002_T1,SRR-40002,SRR-service_1111111,,MSB,
+SRR-40003_T1,SRR-40003,SRR-service_1111111,,CGL,
+SRR-40004_T1,SRR-40004,SRR-service_1111111,,TBM,
+SRR-40005_T1,SRR-40005,SRR-service_1111111,,MSB,

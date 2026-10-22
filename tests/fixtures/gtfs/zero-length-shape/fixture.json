@@ -1,0 +1,5 @@
+{
+  "description": "Every point of the metro shape is the same coordinate.",
+  "extends": "valid-minimal",
+  "expect": ["W_SHAPE_QUALITY"]
+}

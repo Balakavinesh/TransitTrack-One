@@ -1,0 +1,4 @@
+{
+  "description": "Small valid two-agency feed: bus + metro, parent station, entrance, transfer, pathway, curved metro shape, and a trip running past midnight (to 25:10:00).",
+  "expect": []
+}

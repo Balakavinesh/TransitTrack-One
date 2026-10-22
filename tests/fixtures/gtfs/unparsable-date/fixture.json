@@ -1,0 +1,5 @@
+{
+  "description": "calendar end_date is ISO (2027-12-31), not YYYYMMDD.",
+  "extends": "valid-minimal",
+  "expect": ["E_UNPARSABLE_DATE"]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "A route name contains a script tag (as one real MTC service_id does).",
+  "extends": "valid-minimal",
+  "expect": ["W_MARKUP_IN_TEXT"]
+}

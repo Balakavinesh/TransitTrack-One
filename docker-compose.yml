@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: transittrack_db
+    restart: always
+    environment:
+      POSTGRES_USER: transittrack
+      POSTGRES_PASSWORD: transittrack_secret_password
+      POSTGRES_DB: transittrack_one
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U transittrack -d transittrack_one"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: transittrack_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+      DATABASE_URL: postgres://transittrack:transittrack_secret_password@db:5432/transittrack_one
+      JWT_SECRET: production_jwt_secret_transittrack_2026
+      CORS_ORIGIN: "*"
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: transittrack_frontend
+    restart: always
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

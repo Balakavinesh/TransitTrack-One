@@ -1,0 +1,5 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone
+CMRL,Chennai Metro Rail Limited,https://chennaimetrorail.org,Asia/Kolkata,en,044-24378000
+SR_SUB,Southern Railway Suburban,https://sr.indianrailways.gov.in,Asia/Kolkata,en,139
+SR_MRTS,Southern Railway MRTS,https://sr.indianrailways.gov.in,Asia/Kolkata,en,139
+MTC,Metropolitan Transport Corporation Chennai,https://mtcbus.tn.gov.in,Asia/Kolkata,en,044-23455801

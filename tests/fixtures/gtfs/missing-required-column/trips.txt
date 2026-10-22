@@ -1,0 +1,6 @@
+route_id,trip_id,trip_headsign,shape_id
+MTC-R1,MTC-T1,Gamma,
+MTC-R1,MTC-T2,Gamma,
+MTC-R1,MTC-T3,Alpha (night),
+CMRL-R1,CMRL-T1,Delta,CMRL-SH1
+CMRL-R1,CMRL-T2,Delta,CMRL-SH1

@@ -1,0 +1,5 @@
+{
+  "description": "A boarding stop is never served.",
+  "extends": "valid-minimal",
+  "expect": ["W_STOP_WITHOUT_TRIPS"]
+}

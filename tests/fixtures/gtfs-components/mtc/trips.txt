@@ -1,0 +1,3 @@
+trip_id,route_id,service_id,direction_id
+500,100,Regular,0
+501,100,Regular,1

@@ -1,0 +1,5 @@
+{
+  "description": "stop_sequence is a word.",
+  "extends": "valid-minimal",
+  "expect": ["E_INVALID_FIELD"]
+}

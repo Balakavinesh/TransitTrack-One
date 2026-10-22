@@ -1,0 +1,5 @@
+{
+  "description": "Two agencies, but a route has no agency_id (as CMRL routes do in the v0.2.0 unified feed).",
+  "extends": "valid-minimal",
+  "expect": ["E_MISSING_AGENCY_ID"]
+}

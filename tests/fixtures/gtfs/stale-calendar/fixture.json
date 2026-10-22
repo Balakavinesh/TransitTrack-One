@@ -1,0 +1,5 @@
+{
+  "description": "The bus service ended in 2025.",
+  "extends": "valid-minimal",
+  "expect": ["W_STALE_CALENDAR"]
+}

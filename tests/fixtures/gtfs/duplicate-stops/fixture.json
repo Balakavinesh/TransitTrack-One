@@ -1,0 +1,5 @@
+{
+  "description": "Two served stops named \"Alpha Bus Stop\" (after normalisation) are ~15 m apart.",
+  "extends": "valid-minimal",
+  "expect": ["W_DUPLICATE_STOPS"]
+}

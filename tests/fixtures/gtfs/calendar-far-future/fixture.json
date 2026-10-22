@@ -1,0 +1,5 @@
+{
+  "description": "The bus service runs until 2170.",
+  "extends": "valid-minimal",
+  "expect": ["W_CALENDAR_FAR_FUTURE"]
+}

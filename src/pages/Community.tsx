@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   Plus,
@@ -23,6 +23,8 @@ import {
   DemoNote,
 } from "../components/ui";
 import TransitMap from "../components/TransitMap";
+import { api } from "../lib/api";
+
 function ReportForm({
   onClose,
   initialStation,
@@ -44,7 +46,7 @@ function ReportForm({
         in the current demo session.
       </p>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           if (description.trim().length < 15) {
             setError("Please describe the issue in at least 15 characters.");
@@ -61,21 +63,30 @@ function ReportForm({
             setError("Choose an image smaller than 5 MB.");
             return;
           }
-          setReports((list) => [
-            {
-              id: `TT-DEMO-${Date.now().toString().slice(-6)}`,
-              category,
-              station,
-              description:
-                description.trim() +
-                (file ? ` [Demo attachment: ${file.name}]` : ""),
-              status: "Pending",
-              date,
-            },
-            ...list,
-          ]);
-          notify("Demo report added — not submitted to a live service");
+          const newReport: Report = {
+            id: `TT-DEMO-${Date.now().toString().slice(-6)}`,
+            category,
+            station,
+            description:
+              description.trim() +
+              (file ? ` [Demo attachment: ${file.name}]` : ""),
+            status: "Pending",
+            date,
+          };
+          setReports((list) => [newReport, ...list]);
+          notify("Observation recorded — checking community evidence");
           onClose();
+
+          api.createReport({
+            category,
+            station,
+            description: newReport.description,
+            date,
+          }).then((created) => {
+            if (created) {
+              setReports((list) => [created, ...list.filter((r) => r.id !== newReport.id)]);
+            }
+          });
         }}
         noValidate
       >
@@ -166,6 +177,19 @@ export default function Community() {
   const [category, setCategory] = useState("All categories");
   const [status, setStatus] = useState("All statuses");
   const [selected, setSelected] = useState<Report | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    api.getReports().then((data) => {
+      if (mounted && data && data.length > 0) {
+        setReports(data);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, [setReports]);
+
   const filtered = reports.filter(
     (r) =>
       (category === "All categories" || r.category === category) &&
@@ -174,13 +198,22 @@ export default function Community() {
         .toLowerCase()
         .includes(query.toLowerCase()),
   );
-  const update = (value: Report["status"]) => {
+  const update = async (value: Report["status"]) => {
     if (!selected) return;
     setReports((list) =>
       list.map((r) => (r.id === selected.id ? { ...r, status: value } : r)),
     );
     setSelected({ ...selected, status: value });
-    notify(`Demo status changed to ${value}. No external record modified.`);
+
+    if (value === "Verified") {
+      await api.verifyReport(selected.id, "Verified during community review");
+    } else if (value === "Rejected") {
+      await api.rejectReport(selected.id, "Rejected during community review");
+    } else if (value === "Corroborated") {
+      await api.confirmReport(selected.id);
+    }
+
+    notify(`Status changed to ${value}. Evidence updated.`);
   };
   return (
     <>

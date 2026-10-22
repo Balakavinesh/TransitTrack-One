@@ -1,0 +1,9 @@
+pathway_id,from_stop_id,to_stop_id,pathway_mode,is_bidirectional,length,traversal_time,stair_count,max_slope,min_width,signposted_as,wheelchair_accessible
+PW_CENTRAL_01,central,central,1,1,150.0,120,0,0.02,3.5,Central Concourse Walkway,1
+PW_CENTRAL_LIFT,central,central,5,1,15.0,45,0,0.0,1.8,Concourse to Metro Platform Lift B,1
+PW_CENTRAL_STAIRS,central,central,2,1,25.0,60,32,0.35,2.4,Main Stairway North,0
+PW_ALANDUR_INTERCHANGE,alandur,alandur,1,1,80.0,90,0,0.01,4.0,Blue-Green Level Interchange,1
+PW_ALANDUR_LIFT,alandur,alandur,5,1,12.0,30,0,0.0,2.0,Elevator to Green Line,1
+PW_GUINDY_LIFT_B,guindy,guindy,5,1,10.0,40,0,0.0,1.6,Entrance B Lift,1
+PW_GUINDY_RAMP,guindy,guindy,1,1,30.0,45,0,0.05,2.0,North Ramp,1
+PW_AIRPORT_COVERED,airport,airport,1,1,200.0,240,0,0.01,5.0,Terminal to Metro Covered Link,1

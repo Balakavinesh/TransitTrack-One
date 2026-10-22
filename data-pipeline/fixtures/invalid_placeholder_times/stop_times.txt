@@ -1,0 +1,6 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence,pickup_type,drop_off_type
+TRIP_MB_01,00:00:15,00:00:15,airport,1,0,0
+TRIP_MB_01,00:00:15,00:00:15,alandur,2,0,0
+TRIP_MB_01,00:00:15,00:00:15,guindy,3,0,0
+TRIP_MB_01,00:00:15,00:00:15,saidapet,4,0,0
+TRIP_MB_01,00:00:15,00:00:15,central,5,0,0

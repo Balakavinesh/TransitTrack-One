@@ -1,0 +1,5 @@
+{
+  "description": "stops.txt has a row of only commas (as upstream MTC data can).",
+  "extends": "valid-minimal",
+  "expect": ["W_EMPTY_ROW"]
+}

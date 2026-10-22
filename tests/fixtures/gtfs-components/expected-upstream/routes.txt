@@ -1,0 +1,8 @@
+route_id,route_short_name,route_long_name,route_type,agency_id,route_desc
+MTC-100,1A,Alpha - Gamma,3,69,
+CMRL-B1,Blue,Airport - Wimco Nagar,1,,
+SRR-40001,40001,MSB-TBM,2,SR,MSB-TBM
+SRR-40002,40002,TBM-MSB,2,SR,TBM-MSB
+SRR-40003,40003,MSB-CGL,2,SR,MSB-CGL
+SRR-40004,40004,MSB-TBM,2,SR,MSB-TBM
+SRR-40005,40005,TBM-MSB,2,SR,TBM-MSB

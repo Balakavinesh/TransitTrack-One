@@ -1,0 +1,5 @@
+{
+  "description": "A trip goes back in time at its second stop.",
+  "extends": "valid-minimal",
+  "expect": ["W_NON_INCREASING_TIMES"]
+}

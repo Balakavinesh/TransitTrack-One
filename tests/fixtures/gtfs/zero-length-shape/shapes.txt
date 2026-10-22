@@ -1,0 +1,4 @@
+shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence
+CMRL-SH1,13.0005,80.2006,1
+CMRL-SH1,13.0005,80.2006,2
+CMRL-SH1,13.0005,80.2006,3

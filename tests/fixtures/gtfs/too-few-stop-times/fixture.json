@@ -1,0 +1,5 @@
+{
+  "description": "A trip has a single stop time.",
+  "extends": "valid-minimal",
+  "expect": ["W_TRIP_TOO_FEW_STOP_TIMES"]
+}

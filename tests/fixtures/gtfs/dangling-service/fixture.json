@@ -1,0 +1,5 @@
+{
+  "description": "A trip references a service that does not exist.",
+  "extends": "valid-minimal",
+  "expect": ["E_DANGLING_REFERENCE"]
+}

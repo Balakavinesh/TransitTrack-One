@@ -1,0 +1,5 @@
+{
+  "description": "A service_id has a trailing space in both calendar and trips.",
+  "extends": "valid-minimal",
+  "expect": ["W_ID_WHITESPACE"]
+}

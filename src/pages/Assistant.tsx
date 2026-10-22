@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import { assistantPrompts, assistantReply } from "../data/demo";
 import { useApp } from "../lib/state";
 import { PageTitle, Panel, Button, DemoNote } from "../components/ui";
+import { api } from "../lib/api";
+
 interface Message {
   role: "user" | "assistant";
   text: string;
@@ -34,7 +36,7 @@ export default function Assistant() {
   useEffect(() => {
     bottom.current?.scrollIntoView({ behavior: "auto", block: "nearest" });
   }, [messages, loading]);
-  const send = (text = input) => {
+  const send = async (text = input) => {
     if (loading) return;
     if (!text.trim()) {
       setError("Write a question or choose an example prompt.");
@@ -45,16 +47,25 @@ export default function Assistant() {
       return;
     }
     setError("");
-    setMessages((m) => [...m, { role: "user", text: text.trim() }]);
+    const userText = text.trim();
+    setMessages((m) => [...m, { role: "user", text: userText }]);
     setInput("");
     setLoading(true);
-    timer.current = setTimeout(() => {
+
+    try {
+      const reply = await api.askAssistant(userText, language);
       setMessages((m) => [
         ...m,
-        { role: "assistant", ...assistantReply(text, language) },
+        { role: "assistant", ...reply },
       ]);
+    } catch {
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", ...assistantReply(userText, language) },
+      ]);
+    } finally {
       setLoading(false);
-    }, 550);
+    }
   };
   const newChat = () => {
     if (messages.length)

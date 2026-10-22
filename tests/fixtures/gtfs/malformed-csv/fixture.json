@@ -1,0 +1,5 @@
+{
+  "description": "routes.txt has an unterminated quote.",
+  "extends": "valid-minimal",
+  "expect": ["E_MALFORMED_CSV"]
+}

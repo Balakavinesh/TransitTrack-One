@@ -1,0 +1,5 @@
+{
+  "description": "The last stop of a trip has no arrival time.",
+  "extends": "valid-minimal",
+  "expect": ["E_UNPARSABLE_TIME"]
+}

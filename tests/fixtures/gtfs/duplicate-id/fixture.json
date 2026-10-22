@@ -1,0 +1,5 @@
+{
+  "description": "Two stops share stop_id MTC-S1.",
+  "extends": "valid-minimal",
+  "expect": ["E_DUPLICATE_ID"]
+}

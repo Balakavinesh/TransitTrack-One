@@ -1,0 +1,7 @@
+from_stop_id,to_stop_id,transfer_type,min_transfer_time
+central,park-town,2,480
+park-town,central,2,480
+alandur,alandur,2,180
+guindy,guindy,2,240
+tambaram,tambaram,2,180
+airport,airport,2,240

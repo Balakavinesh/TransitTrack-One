@@ -1,0 +1,8 @@
+from_stop_id,to_stop_id,from_route_id,to_route_id,from_trip_id,to_trip_id,transfer_type,min_transfer_time
+CMRL-P1,MTC-S1,,,,,2,180
+MTC-S1,MTC-S1,,,,,2,
+MTC-S2,MTC-S2,,,,,2,abc
+MTC-S2,MTC-S2,MTC-R9,,,,3,
+MTC-S2,MTC-S2,MTC-R1,,MTC-T1,,0,
+MTC-S3,MTC-S3,,,MTC-T9,,3,
+MTC-S9,MTC-S1,,,,,0,

@@ -1,0 +1,2 @@
+service_id,date,exception_type
+CMRL-WD,20261002,2

@@ -1,0 +1,3 @@
+pathway_id,from_stop_id,to_stop_id,pathway_mode,is_bidirectional
+PW1,MSB,MSB_P_1,1,1
+PW2,MSB,MSB_P_9,1,1

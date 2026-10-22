@@ -1,0 +1,2 @@
+pathway_id,from_stop_id,to_stop_id,pathway_mode,is_bidirectional
+SRR-PW1,SRR-MSB,SRR-MSB_P_1,1,1

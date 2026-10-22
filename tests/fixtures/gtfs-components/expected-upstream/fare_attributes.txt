@@ -1,0 +1,2 @@
+fare_id,price,currency_type,payment_method,transfers,transfer_duration
+CMRL-F1,20,INR,1,0,

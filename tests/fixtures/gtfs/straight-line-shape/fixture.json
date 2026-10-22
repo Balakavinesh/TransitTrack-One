@@ -1,0 +1,5 @@
+{
+  "description": "The metro shape is just its two stops joined by a line.",
+  "extends": "valid-minimal",
+  "expect": ["W_SHAPE_QUALITY"]
+}

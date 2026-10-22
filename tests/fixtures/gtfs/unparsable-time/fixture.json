@@ -1,0 +1,5 @@
+{
+  "description": "A stop time uses the letter O instead of zero (6:1O:00).",
+  "extends": "valid-minimal",
+  "expect": ["E_UNPARSABLE_TIME"]
+}

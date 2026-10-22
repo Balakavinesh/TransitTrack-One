@@ -1,0 +1,5 @@
+{
+  "description": "A stop is in Delhi.",
+  "extends": "valid-minimal",
+  "expect": ["E_COORD_OUTSIDE_BBOX"]
+}

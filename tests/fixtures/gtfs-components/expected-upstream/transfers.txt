@@ -1,0 +1,2 @@
+from_stop_id,to_stop_id,from_route_id,to_route_id,transfer_type
+CMRL-P1,CMRL-P2,CMRL-B1,,0

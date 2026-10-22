@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useReducedMotion } from "framer-motion";
 import {
   BarChart,
@@ -33,12 +33,35 @@ import {
   Empty,
 } from "../components/ui";
 import TransitMap from "../components/TransitMap";
-import { scenarios, coverage, stations } from "../data/demo";
+import { scenarios, coverage, stations, type Report } from "../data/demo";
 import { downloadFile, useApp } from "../lib/state";
+import { api } from "../lib/api";
+
 export function Resilience() {
   const [scenario, setScenario] = useState(scenarios[0]);
   const [closed, setClosed] = useState(false);
   const [kind, setKind] = useState("Station");
+  const [analysisResult, setAnalysisResult] = useState<any>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    api.runResilienceScenario(scenario.id, closed).then((res) => {
+      if (mounted && res) {
+        setAnalysisResult(res);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, [scenario.id, closed]);
+
+  const baselineReachable =
+    analysisResult?.baselineReachable ?? scenario.baseline;
+  const reachableCount =
+    analysisResult?.disruptedReachable ??
+    (closed ? scenario.reachable : scenario.baseline);
+  const delayMinutes =
+    analysisResult?.additionalDelayMinutes ?? (closed ? scenario.delay : 0);
   return (
     <>
       <PageTitle
@@ -160,7 +183,7 @@ export function Resilience() {
             <div>
               <span>Baseline</span>
               <strong>
-                {scenario.baseline}
+                {baselineReachable}
                 <small> / 10</small>
               </strong>
               <p>sample nodes reachable</p>
@@ -169,7 +192,7 @@ export function Resilience() {
             <div className={closed ? "amber-text" : ""}>
               <span>{closed ? "Disrupted example" : "Current example"}</span>
               <strong>
-                {closed ? scenario.reachable : scenario.baseline}
+                {reachableCount}
                 <small> / 10</small>
               </strong>
               <p>sample nodes reachable</p>
@@ -178,7 +201,9 @@ export function Resilience() {
           <div className="comparison-bars">
             <i style={{ width: "100%" }} />
             <i
-              style={{ width: `${closed ? scenario.reachable * 10 : 100}%` }}
+              style={{
+                width: `${closed ? Math.min(100, reachableCount * 10) : 100}%`,
+              }}
             />
           </div>
         </Panel>
@@ -188,7 +213,7 @@ export function Resilience() {
           </div>
           <span className="eyebrow">ILLUSTRATIVE JOURNEY IMPACT</span>
           <strong>
-            +{closed ? scenario.delay : 0}
+            +{delayMinutes}
             <small> min</small>
           </strong>
           <h3>Airport → Central example</h3>
@@ -235,13 +260,30 @@ export function Coverage() {
   const [selected, setSelected] = useState("Thiruvanmiyur");
   const { notify, preferences } = useApp();
   const systemReduced = useReducedMotion();
-  const rows = coverage.filter(
+  const [gapData, setGapData] = useState<any[]>(coverage);
+
+  useEffect(() => {
+    let mounted = true;
+    api.getFeederGaps(threshold, maxGap, access).then((data) => {
+      if (mounted && data && data.length > 0) {
+        setGapData(data);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, [threshold, maxGap, access]);
+
+  const rows = gapData.filter(
     (c) => c.gap <= maxGap && (!access || c.access >= 60),
   );
   const station = stations.find((s) => s.name === selected);
   const values = rows.map((c) => ({
     ...c,
-    displayGap: Math.max(1, c.gap - (threshold - 10) / 2),
+    displayGap:
+      c.displayGap !== undefined
+        ? c.displayGap
+        : Math.max(1, c.gap - (threshold - 10) / 2),
   }));
   return (
     <>
@@ -468,9 +510,25 @@ export function OpenData() {
   const [selected, setSelected] = useState("TT-1041");
   const [format, setFormat] = useState("JSON");
   const [preview, setPreview] = useState("Structured change");
-  const eligible = reports.filter(
-    (r) => r.status === "Verified" || r.status === "Corroborated",
-  );
+  const [remoteEligible, setRemoteEligible] = useState<Report[] | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    api.getEligibleCorrections().then((data) => {
+      if (mounted && data && data.length > 0) {
+        setRemoteEligible(data);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const eligible =
+    remoteEligible ||
+    reports.filter(
+      (r) => r.status === "Verified" || r.status === "Corroborated",
+    );
   const report = eligible.find((r) => r.id === selected) || eligible[0];
   const payload = report
     ? {
@@ -622,7 +680,8 @@ export function OpenData() {
               </span>
               <Button
                 disabled={!report}
-                onClick={() => {
+                onClick={async () => {
+                  api.generateExport(report.id, format as any, preview);
                   downloadFile(
                     `transittrack-demo-correction.${preview !== "Structured change" ? "txt" : format === "CSV" ? "csv" : "json"}`,
                     content,

@@ -1,0 +1,5 @@
+{
+  "description": "A trip names a shape that does not exist.",
+  "extends": "valid-minimal",
+  "expect": ["W_DANGLING_OPTIONAL_REFERENCE"]
+}

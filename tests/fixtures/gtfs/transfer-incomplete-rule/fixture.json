@@ -1,0 +1,5 @@
+{
+  "description": "transfers.txt: type 2 without min_transfer_time, a non-integer minimum, and rows naming an unknown stop, route and trip.",
+  "extends": "valid-minimal",
+  "expect": ["W_TRANSFER_INCOMPLETE_RULE", "W_DANGLING_OPTIONAL_REFERENCE"]
+}

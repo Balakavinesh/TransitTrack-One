@@ -1,0 +1,195 @@
+{
+  "version": 0.6,
+  "generator": "synthetic test fixture (not real OSM data)",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-01T00:00:00Z"
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 1001,
+      "lat": 13.0092,
+      "lon": 80.2132,
+      "tags": {
+        "name": "Guindy",
+        "name:ta": "கிண்டி மெட்ரோ",
+        "railway": "station",
+        "station": "subway"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1002,
+      "lat": 13.0079,
+      "lon": 80.2128,
+      "tags": {
+        "name": "Guindy",
+        "name:ta": "கிண்டி",
+        "railway": "station",
+        "train": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1003,
+      "lat": 13.0921,
+      "lon": 80.2921,
+      "tags": {
+        "name": "Chennai Beach",
+        "railway": "station",
+        "train": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1004,
+      "lat": 13.0781,
+      "lon": 80.2611,
+      "tags": {
+        "name": "Chennai Egmore",
+        "name:ta": "சென்னை எழும்பூர்",
+        "railway": "station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1005,
+      "lat": 12.9805,
+      "lon": 80.1603,
+      "tags": {
+        "name": "Chennai International Airport",
+        "name:ta": "விமான நிலையம்",
+        "railway": "station",
+        "network": "Chennai Metro"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2001,
+      "lat": 13.01,
+      "lon": 80.215,
+      "tags": {
+        "name": "Guindy",
+        "name:ta": "கிண்டி",
+        "place": "suburb"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2002,
+      "lat": 13.001,
+      "lon": 80.2,
+      "tags": {
+        "name": "Alpha Nagar",
+        "place": "neighbourhood"
+      }
+    },
+    {
+      "type": "way",
+      "id": 3001,
+      "center": {
+        "lat": 13.0782,
+        "lon": 80.2612
+      },
+      "tags": {
+        "name": "Government Hospital",
+        "name:ta": "அரசு மருத்துவமனை",
+        "amenity": "hospital"
+      }
+    },
+    {
+      "type": "way",
+      "id": 3002,
+      "center": {
+        "lat": 13.0105,
+        "lon": 80.2205
+      },
+      "tags": {
+        "name": "Test Engineering College",
+        "amenity": "college"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3003,
+      "lat": 13.0106,
+      "lon": 80.2206,
+      "tags": {
+        "name": "Test Engineering College Hostel",
+        "amenity": "college"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3004,
+      "lat": 13.02,
+      "lon": 80.22,
+      "tags": {
+        "amenity": "school"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4001,
+      "lat": 13.011,
+      "lon": 80.235,
+      "tags": {
+        "name": "அண்ணா பல்கலைக்கழகம்",
+        "name:en": "Anna University",
+        "amenity": "college"
+      }
+    },
+    {
+      "type": "way",
+      "id": 4002,
+      "center": {
+        "lat": 13.017,
+        "lon": 80.264
+      },
+      "tags": {
+        "name": "Ambedkar Law University - School of Excellence",
+        "amenity": "college"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4003,
+      "lat": 13.0799,
+      "lon": 80.2107,
+      "tags": {
+        "name": "Anna Adarsh College for Women",
+        "amenity": "college"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4004,
+      "lat": 13.06,
+      "lon": 80.25,
+      "tags": {
+        "name": "Apollo Hospital",
+        "amenity": "hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4005,
+      "lat": 12.45,
+      "lon": 79.85,
+      "tags": {
+        "name": "Apollo Hospital",
+        "amenity": "hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4006,
+      "lat": 13.061,
+      "lon": 80.251,
+      "tags": {
+        "name": "Thousand Lights",
+        "place": "neighbourhood"
+      }
+    }
+  ]
+}

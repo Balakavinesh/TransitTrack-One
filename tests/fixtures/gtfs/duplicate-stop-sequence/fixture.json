@@ -1,0 +1,5 @@
+{
+  "description": "A trip has two stop times with the same stop_sequence.",
+  "extends": "valid-minimal",
+  "expect": ["E_DUPLICATE_ID"]
+}
